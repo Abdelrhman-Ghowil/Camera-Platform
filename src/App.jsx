@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import data from "./data/bundle.json";
 
 const STORAGE_KEY = "security-bundle-builder:v1";
 const CATEGORY_ORDER = ["Cameras", "Sensors", "Accessories", "Plan"];
+const PRODUCT_MAP = new Map(data.steps.flatMap((step) => step.products.map((product) => [product.id, product])));
 
 function money(value) {
   return new Intl.NumberFormat("en-US", {
@@ -34,7 +35,7 @@ function makeInitialQuantities() {
 function loadSavedQuantities() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return saved?.quantities || makeInitialQuantities();
+    return mergeQuantities(makeInitialQuantities(), saved?.quantities || {});
   } catch {
     return makeInitialQuantities();
   }
@@ -43,7 +44,7 @@ function loadSavedQuantities() {
 function loadSavedVariants() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return saved?.selectedVariant || makeInitialVariants();
+    return mergeSelectedVariants(makeInitialVariants(), saved?.selectedVariant || {});
   } catch {
     return makeInitialVariants();
   }
@@ -55,6 +56,44 @@ function makeInitialVariants() {
       step.products.filter((product) => product.variants).map((product) => [product.id, product.variants[0].id])
     )
   );
+}
+
+function mergeQuantities(defaults, saved) {
+  const merged = JSON.parse(JSON.stringify(defaults));
+
+  Object.entries(saved).forEach(([productId, savedValue]) => {
+    const product = PRODUCT_MAP.get(productId);
+    if (!product) return;
+
+    if (product.variants && savedValue && typeof savedValue === "object" && !Array.isArray(savedValue)) {
+      merged[productId] = { ...merged[productId] };
+      product.variants.forEach((variant) => {
+        if (Number.isFinite(savedValue[variant.id])) {
+          merged[productId][variant.id] = Math.max(variant.lockedMinimum || 0, savedValue[variant.id]);
+        }
+      });
+      return;
+    }
+
+    if (!product.variants && Number.isFinite(savedValue)) {
+      merged[productId] = Math.max(product.lockedMinimum || 0, savedValue);
+    }
+  });
+
+  return merged;
+}
+
+function mergeSelectedVariants(defaults, saved) {
+  const merged = { ...defaults };
+
+  Object.entries(saved).forEach(([productId, variantId]) => {
+    const product = PRODUCT_MAP.get(productId);
+    if (product?.variants?.some((variant) => variant.id === variantId)) {
+      merged[productId] = variantId;
+    }
+  });
+
+  return merged;
 }
 
 function productQuantity(product, quantities) {
@@ -81,7 +120,9 @@ function lineItems(quantities) {
             quantity: quantities[product.id][variant.id],
             price: product.price,
             compareAtPrice: product.compareAtPrice,
+            priceLabel: product.priceLabel,
             billingLabel: product.billingLabel,
+            lockedMinimum: product.lockedMinimum,
             swatch: variant.swatch
           }));
       }
@@ -98,7 +139,9 @@ function lineItems(quantities) {
               quantity,
               price: product.price,
               compareAtPrice: product.compareAtPrice,
-              billingLabel: product.billingLabel
+              priceLabel: product.priceLabel,
+              billingLabel: product.billingLabel,
+              lockedMinimum: product.lockedMinimum
             }
           ]
         : [];
@@ -107,7 +150,11 @@ function lineItems(quantities) {
 }
 
 function Icon({ name }) {
-  return <span className={`step-icon step-icon--${name}`} aria-hidden="true" />;
+  return (
+    <span className="step-icon" aria-hidden="true">
+      <img src={name} alt="" />
+    </span>
+  );
 }
 
 function QuantityStepper({ value, min = 0, onChange, compact = false }) {
@@ -126,11 +173,14 @@ function QuantityStepper({ value, min = 0, onChange, compact = false }) {
 
 function ProductCard({ product, quantities, selectedVariant, onSelectVariant, onSetQuantity }) {
   const totalQuantity = productQuantity(product, quantities);
-  const currentVariant = product.variants?.find((variant) => variant.id === selectedVariant[product.id]);
+  const currentVariant = product.variants?.find((variant) => variant.id === selectedVariant[product.id]) || product.variants?.[0];
   const currentQuantity = product.variants
     ? quantities[product.id]?.[currentVariant?.id] || 0
     : quantities[product.id] || 0;
   const min = product.lockedMinimum || 0;
+  const displayedQuantity = Math.max(1, currentQuantity);
+  const displayedPrice = product.price * displayedQuantity;
+  const displayedComparePrice = product.compareAtPrice ? product.compareAtPrice * displayedQuantity : null;
 
   return (
     <article className={`product-card ${totalQuantity > 0 ? "is-selected" : ""}`}>
@@ -141,9 +191,10 @@ function ProductCard({ product, quantities, selectedVariant, onSelectVariant, on
       <div className="product-card__body">
         <div>
           <h3>{product.title}</h3>
-          <p>{product.description}</p>
+          <p>
+            {product.description} <a href={product.learnMoreUrl}>Learn More</a>
+          </p>
         </div>
-        <a href={product.learnMoreUrl}>Learn More</a>
         {product.variants ? (
           <div className="variants" aria-label={`${product.title} variants`}>
             {product.variants.map((variant) => (
@@ -153,7 +204,9 @@ function ProductCard({ product, quantities, selectedVariant, onSelectVariant, on
                 className={variant.id === currentVariant?.id ? "is-active" : ""}
                 onClick={() => onSelectVariant(product.id, variant.id)}
               >
-                <span style={{ background: variant.swatch }} />
+                <span style={{ background: variant.swatch }}>
+                  {variant.image ? <img src={variant.image} alt="" /> : null}
+                </span>
                 {variant.label}
               </button>
             ))}
@@ -163,9 +216,9 @@ function ProductCard({ product, quantities, selectedVariant, onSelectVariant, on
       <div className="product-card__footer">
         <QuantityStepper value={currentQuantity} min={min} onChange={(next) => onSetQuantity(product, next, currentVariant?.id)} />
         <div className="price">
-          {product.compareAtPrice ? <s>{money(product.compareAtPrice)}</s> : null}
+          {displayedComparePrice ? <s>{money(displayedComparePrice)}</s> : null}
           <strong>
-            {money(product.price)}
+            {product.priceLabel || money(displayedPrice)}
             {product.billingLabel ? <span>{product.billingLabel}</span> : null}
           </strong>
         </div>
@@ -216,11 +269,12 @@ function ReviewPanel({ quantities, onSetLineQuantity, onSave, didSave, onCheckou
   return (
     <aside className="review-panel">
       <div className="review-panel__heading">
-        <span>Bundle review</span>
+        <span>Review</span>
         <h2>Your security system</h2>
+        <p>Review your personalized protection system designed to keep what matters most safe.</p>
       </div>
       <div className="review-list">
-        {grouped.map((group) => (
+        {grouped.length > 0 ? grouped.map((group) => (
           <section key={group.category} className="review-group">
             <h3>{group.category}</h3>
             {group.items.map((item) => (
@@ -232,13 +286,13 @@ function ReviewPanel({ quantities, onSetLineQuantity, onSave, didSave, onCheckou
                   <QuantityStepper
                     compact
                     value={item.quantity}
-                    min={item.productId === "pro-monitoring" ? 1 : 0}
+                    min={item.lockedMinimum || 0}
                     onChange={(next) => onSetLineQuantity(item, next)}
                   />
                 </div>
                 <div className="review-item__price">
                   <strong>
-                    {money(item.price * item.quantity)}
+                    {item.priceLabel || money(item.price * item.quantity)}
                     {item.billingLabel ? <span>{item.billingLabel}</span> : null}
                   </strong>
                   {item.compareAtPrice ? <s>{money(item.compareAtPrice * item.quantity)}</s> : null}
@@ -246,23 +300,33 @@ function ReviewPanel({ quantities, onSetLineQuantity, onSave, didSave, onCheckou
               </div>
             ))}
           </section>
-        ))}
+        )) : <p className="empty-review">Add products to start building your security system.</p>}
       </div>
       <div className="review-summary">
-        <div>
-          <span>Shipping</span>
-          <strong>Free</strong>
+        <div className="shipping-row">
+          <span className="shipping-label">
+            <img src="/assets/figma/delivery-icon.svg" alt="" />
+            Fast Shipping
+          </span>
+          <span>
+            <s>{money(5.99)}</s>
+            <strong>FREE</strong>
+          </span>
         </div>
-        <div className="guarantee">60 day satisfaction guarantee</div>
-        <p>As low as {money(Math.max(12, subtotal / 12))}/mo with flexible financing.</p>
+        <div className="guarantee">
+          <img src="/assets/figma/satisfaction-badge.png" alt="" />
+          <p>30-day hassle-free returns If you're not totally in love with the product, we will refund you 100%.</p>
+        </div>
+        <p className="financing">as low as {money(Math.max(12, subtotal / 9.79))}/mo</p>
         <div className="total-row">
-          <span>Total</span>
+          <span>
+            <s>{money(compareTotal)}</s>
+          </span>
           <strong>{money(subtotal)}</strong>
         </div>
         {savings > 0 ? (
           <div className="savings-row">
-            <s>{money(compareTotal)}</s>
-            <span>You save {money(savings)} today</span>
+            <span>Congrats! You're saving {money(savings)} on your security bundle!</span>
           </div>
         ) : null}
         <button className="checkout-button" type="button" onClick={onCheckout}>
@@ -286,15 +350,16 @@ export default function App() {
   function setProductQuantity(product, nextQuantity, variantId) {
     setQuantities((current) => {
       if (product.variants) {
+        const variant = product.variants.find((candidate) => candidate.id === variantId);
         return {
           ...current,
           [product.id]: {
             ...current[product.id],
-            [variantId]: nextQuantity
+            [variantId]: Math.max(variant?.lockedMinimum || 0, nextQuantity)
           }
         };
       }
-      return { ...current, [product.id]: nextQuantity };
+      return { ...current, [product.id]: Math.max(product.lockedMinimum || 0, nextQuantity) };
     });
     setDidSave(false);
   }

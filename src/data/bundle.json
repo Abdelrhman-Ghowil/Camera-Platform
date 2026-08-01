@@ -4,49 +4,76 @@
       "id": "cameras",
       "step": 1,
       "title": "Choose your cameras",
-      "icon": "camera",
+      "icon": "/assets/figma/cam-icon.svg",
       "nextLabel": "Next: Choose your plan",
       "products": [
         {
-          "id": "outdoor-camera",
+          "id": "wyze-cam-v4",
           "category": "Cameras",
-          "title": "Outdoor Camera",
-          "description": "Keep watch around doors, driveways and garden spaces with weather-ready HD video.",
+          "title": "Wyze Cam v4",
+          "description": "The clearest Wyze Cam ever made.",
+          "learnMoreUrl": "#",
+          "image": "/assets/figma/wyze-cam-v4.png",
+          "price": 27.98,
+          "compareAtPrice": 35.98,
+          "variants": [
+            { "id": "white", "label": "White", "image": "/assets/figma/wyze-cam-v4-white.png", "swatch": "#f7f7f7", "initialQuantity": 1 },
+            { "id": "grey", "label": "Grey", "image": "/assets/figma/wyze-cam-v4-grey.png", "swatch": "#b6b6b6", "initialQuantity": 0 },
+            { "id": "black", "label": "Black", "image": "/assets/figma/wyze-cam-v4-black.png", "swatch": "#181818", "initialQuantity": 0 }
+          ]
+        },
+        {
+          "id": "wyze-cam-pan-v3",
+          "category": "Cameras",
+          "title": "Wyze Cam Pan v3",
+          "description": "360° pan and 180° tilt security camera.",
+          "learnMoreUrl": "#",
+          "badge": "Save 12%",
+          "image": "/assets/figma/wyze-cam-pan-v3.png",
+          "price": 23.99,
+          "compareAtPrice": 28.99,
+          "variants": [
+            { "id": "white", "label": "White", "image": "/assets/figma/wyze-pan-white.png", "swatch": "#f7f7f7", "initialQuantity": 2 },
+            { "id": "black", "label": "Black", "image": "/assets/figma/wyze-pan-black.png", "swatch": "#181818", "initialQuantity": 0 }
+          ]
+        },
+        {
+          "id": "wyze-floodlight-v2",
+          "category": "Cameras",
+          "title": "Wyze Cam Floodlight v2",
+          "description": "2K floodlight camera with a 160° wide-angle view for your garage.",
           "learnMoreUrl": "#",
           "badge": "Save 22%",
-          "image": "/assets/outdoor-camera.svg",
-          "price": 99,
-          "compareAtPrice": 129,
+          "image": "/assets/figma/wyze-floodlight.png",
+          "price": 69.98,
+          "compareAtPrice": 89.98,
           "variants": [
-            { "id": "snow", "label": "Snow", "swatch": "#f5f7f4", "initialQuantity": 1 },
-            { "id": "midnight", "label": "Midnight", "swatch": "#1f2a2e", "initialQuantity": 0 }
+            { "id": "white", "label": "White", "image": "/assets/figma/wyze-floodlight-white.png", "swatch": "#f7f7f7", "initialQuantity": 0 },
+            { "id": "black", "label": "Black", "image": "/assets/figma/wyze-floodlight-black.png", "swatch": "#181818", "initialQuantity": 0 }
           ]
         },
         {
-          "id": "indoor-camera",
+          "id": "wyze-duo-doorbell",
           "category": "Cameras",
-          "title": "Indoor Camera",
-          "description": "A compact camera for entryways, nurseries and shared spaces with crisp two-way audio.",
+          "title": "Wyze Duo Cam Doorbell",
+          "description": "Two cameras. Two views. Double the porch protection.",
           "learnMoreUrl": "#",
-          "image": "/assets/indoor-camera.svg",
-          "price": 69,
-          "compareAtPrice": 89,
-          "variants": [
-            { "id": "white", "label": "White", "swatch": "#ffffff", "initialQuantity": 0 },
-            { "id": "charcoal", "label": "Charcoal", "swatch": "#2f3437", "initialQuantity": 0 }
-          ]
-        },
-        {
-          "id": "doorbell-camera",
-          "category": "Cameras",
-          "title": "Video Doorbell",
-          "description": "Answer the door from anywhere and capture visitors in sharp, wide-angle video.",
-          "learnMoreUrl": "#",
-          "badge": "Best seller",
-          "image": "/assets/doorbell-camera.svg",
-          "price": 119,
-          "compareAtPrice": 149,
+          "image": "/assets/figma/wyze-duo-doorbell.png",
+          "price": 69.98,
           "initialQuantity": 0
+        },
+        {
+          "id": "wyze-battery-cam-pro",
+          "category": "Cameras",
+          "title": "Wyze Battery Cam Pro",
+          "description": "Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.",
+          "learnMoreUrl": "#",
+          "image": "/assets/figma/wyze-battery-cam-pro-white.png",
+          "price": 89.98,
+          "variants": [
+            { "id": "white", "label": "White", "image": "/assets/figma/wyze-battery-cam-pro-white.png", "swatch": "#f7f7f7", "initialQuantity": 0 },
+            { "id": "black", "label": "Black", "image": "/assets/figma/wyze-battery-cam-pro-black.png", "swatch": "#181818", "initialQuantity": 0 }
+          ]
         }
       ]
     },
@@ -54,33 +81,21 @@
       "id": "plan",
       "step": 2,
       "title": "Choose your plan",
-      "icon": "shield",
+      "icon": "/assets/figma/plan-icon.svg",
       "nextLabel": "Next: Choose your sensors",
       "products": [
         {
-          "id": "pro-monitoring",
+          "id": "cam-unlimited",
           "category": "Plan",
-          "title": "Professional Monitoring",
-          "description": "24/7 emergency dispatch, cellular backup and app control for your whole system.",
+          "title": "Cam Unlimited",
+          "description": "Unlimited cloud events, smart alerts and camera protection.",
           "learnMoreUrl": "#",
-          "badge": "Recommended",
-          "image": "/assets/monitoring-plan.svg",
-          "price": 29.99,
-          "compareAtPrice": 39.99,
+          "image": "/assets/figma/plan-icon.svg",
+          "price": 9.99,
+          "compareAtPrice": 12.99,
           "billingLabel": "/mo",
           "initialQuantity": 1,
           "lockedMinimum": 1
-        },
-        {
-          "id": "self-monitoring",
-          "category": "Plan",
-          "title": "Self Monitoring",
-          "description": "Smart alerts and live camera viewing without emergency dispatch.",
-          "learnMoreUrl": "#",
-          "image": "/assets/self-plan.svg",
-          "price": 9.99,
-          "billingLabel": "/mo",
-          "initialQuantity": 0
         }
       ]
     },
@@ -88,41 +103,31 @@
       "id": "sensors",
       "step": 3,
       "title": "Choose your sensors",
-      "icon": "sensor",
+      "icon": "/assets/figma/sensor-icon.svg",
       "nextLabel": "Next: Add extra protection",
       "products": [
         {
-          "id": "entry-sensor",
+          "id": "wyze-motion-sensor",
           "category": "Sensors",
-          "title": "Entry Sensor",
-          "description": "Know the moment a door, window or cabinet opens.",
+          "title": "Wyze Sense Motion Sensor",
+          "description": "Detect motion in key spaces around your home.",
           "learnMoreUrl": "#",
-          "badge": "Save 15%",
-          "image": "/assets/entry-sensor.svg",
-          "price": 24,
-          "compareAtPrice": 29,
-          "initialQuantity": 3
+          "image": "/assets/figma/wyze-motion-sensor.png",
+          "price": 29.99,
+          "initialQuantity": 2
         },
         {
-          "id": "motion-sensor",
+          "id": "wyze-sense-hub",
           "category": "Sensors",
-          "title": "Motion Sensor",
-          "description": "Detect unexpected movement in hallways and larger rooms.",
+          "title": "Wyze Sense Hub (Required)",
+          "description": "The required hub for your Wyze Sense security accessories.",
           "learnMoreUrl": "#",
-          "image": "/assets/motion-sensor.svg",
-          "price": 34,
-          "compareAtPrice": 39,
-          "initialQuantity": 1
-        },
-        {
-          "id": "glassbreak-sensor",
-          "category": "Sensors",
-          "title": "Glassbreak Sensor",
-          "description": "Listen for the unique sound pattern of breaking glass.",
-          "learnMoreUrl": "#",
-          "image": "/assets/glassbreak-sensor.svg",
-          "price": 39,
-          "initialQuantity": 0
+          "image": "/assets/figma/wyze-sense-hub.png",
+          "price": 0,
+          "compareAtPrice": 29.92,
+          "priceLabel": "FREE",
+          "initialQuantity": 1,
+          "lockedMinimum": 1
         }
       ]
     },
@@ -130,31 +135,18 @@
       "id": "accessories",
       "step": 4,
       "title": "Add extra protection",
-      "icon": "plus",
+      "icon": "/assets/figma/protection-icon.svg",
       "nextLabel": "Review your system",
       "products": [
         {
-          "id": "keypad",
+          "id": "wyze-microsd",
           "category": "Accessories",
-          "title": "Wireless Keypad",
-          "description": "Arm and disarm your system from a hallway, entry or bedroom.",
+          "title": "Wyze MicroSD Card (256GB)",
+          "description": "Local recording storage for compatible Wyze cameras.",
           "learnMoreUrl": "#",
-          "image": "/assets/keypad.svg",
-          "price": 49,
-          "compareAtPrice": 59,
-          "initialQuantity": 1
-        },
-        {
-          "id": "siren",
-          "category": "Accessories",
-          "title": "Indoor Siren",
-          "description": "A loud extra alarm for bigger homes and detached spaces.",
-          "learnMoreUrl": "#",
-          "badge": "Save 10%",
-          "image": "/assets/siren.svg",
-          "price": 44,
-          "compareAtPrice": 49,
-          "initialQuantity": 0
+          "image": "/assets/figma/wyze-microsd.png",
+          "price": 20.98,
+          "initialQuantity": 2
         }
       ]
     }

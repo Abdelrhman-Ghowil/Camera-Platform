@@ -73,6 +73,6 @@ Clicking `Save my system for later` saves the current configuration to `localSto
 
 - Built with React and Vite.
 - Styling is plain CSS in `src/styles.css`.
-- Product artwork is stored locally in `public/assets`.
+- Figma-exported product artwork, icons and the satisfaction badge are stored locally in `public/assets/figma`.
 - Checkout uses a lightweight placeholder confirmation.
-- The Figma connector rejected the supplied file/node during implementation, so the UI was built from `requirment.md` and the provided design intent rather than exact exported Figma assets.
+- The implementation follows `requirment.md` and the reachable `Frontend Test Figma Copy` frames `1735` and `1736`.
