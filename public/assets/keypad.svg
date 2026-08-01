@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Wireless keypad">
+  <rect width="160" height="160" rx="24" fill="#f1efe7"/>
+  <rect x="42" y="24" width="76" height="112" rx="18" fill="#fff" stroke="#244238" stroke-width="6"/>
+  <path d="M62 54h36M62 76h8m16 0h8m-32 20h8m16 0h8m-32 20h8m16 0h8" stroke="#1d6b57" stroke-width="7" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Self monitoring plan">
+  <rect width="160" height="160" rx="24" fill="#f3eee8"/>
+  <rect x="48" y="24" width="64" height="112" rx="18" fill="#fff" stroke="#244238" stroke-width="6"/>
+  <path d="M64 52h32M64 76h32M64 100h20" stroke="#1d6b57" stroke-width="7" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,162 @@
+{
+  "steps": [
+    {
+      "id": "cameras",
+      "step": 1,
+      "title": "Choose your cameras",
+      "icon": "camera",
+      "nextLabel": "Next: Choose your plan",
+      "products": [
+        {
+          "id": "outdoor-camera",
+          "category": "Cameras",
+          "title": "Outdoor Camera",
+          "description": "Keep watch around doors, driveways and garden spaces with weather-ready HD video.",
+          "learnMoreUrl": "#",
+          "badge": "Save 22%",
+          "image": "/assets/outdoor-camera.svg",
+          "price": 99,
+          "compareAtPrice": 129,
+          "variants": [
+            { "id": "snow", "label": "Snow", "swatch": "#f5f7f4", "initialQuantity": 1 },
+            { "id": "midnight", "label": "Midnight", "swatch": "#1f2a2e", "initialQuantity": 0 }
+          ]
+        },
+        {
+          "id": "indoor-camera",
+          "category": "Cameras",
+          "title": "Indoor Camera",
+          "description": "A compact camera for entryways, nurseries and shared spaces with crisp two-way audio.",
+          "learnMoreUrl": "#",
+          "image": "/assets/indoor-camera.svg",
+          "price": 69,
+          "compareAtPrice": 89,
+          "variants": [
+            { "id": "white", "label": "White", "swatch": "#ffffff", "initialQuantity": 0 },
+            { "id": "charcoal", "label": "Charcoal", "swatch": "#2f3437", "initialQuantity": 0 }
+          ]
+        },
+        {
+          "id": "doorbell-camera",
+          "category": "Cameras",
+          "title": "Video Doorbell",
+          "description": "Answer the door from anywhere and capture visitors in sharp, wide-angle video.",
+          "learnMoreUrl": "#",
+          "badge": "Best seller",
+          "image": "/assets/doorbell-camera.svg",
+          "price": 119,
+          "compareAtPrice": 149,
+          "initialQuantity": 0
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "step": 2,
+      "title": "Choose your plan",
+      "icon": "shield",
+      "nextLabel": "Next: Choose your sensors",
+      "products": [
+        {
+          "id": "pro-monitoring",
+          "category": "Plan",
+          "title": "Professional Monitoring",
+          "description": "24/7 emergency dispatch, cellular backup and app control for your whole system.",
+          "learnMoreUrl": "#",
+          "badge": "Recommended",
+          "image": "/assets/monitoring-plan.svg",
+          "price": 29.99,
+          "compareAtPrice": 39.99,
+          "billingLabel": "/mo",
+          "initialQuantity": 1,
+          "lockedMinimum": 1
+        },
+        {
+          "id": "self-monitoring",
+          "category": "Plan",
+          "title": "Self Monitoring",
+          "description": "Smart alerts and live camera viewing without emergency dispatch.",
+          "learnMoreUrl": "#",
+          "image": "/assets/self-plan.svg",
+          "price": 9.99,
+          "billingLabel": "/mo",
+          "initialQuantity": 0
+        }
+      ]
+    },
+    {
+      "id": "sensors",
+      "step": 3,
+      "title": "Choose your sensors",
+      "icon": "sensor",
+      "nextLabel": "Next: Add extra protection",
+      "products": [
+        {
+          "id": "entry-sensor",
+          "category": "Sensors",
+          "title": "Entry Sensor",
+          "description": "Know the moment a door, window or cabinet opens.",
+          "learnMoreUrl": "#",
+          "badge": "Save 15%",
+          "image": "/assets/entry-sensor.svg",
+          "price": 24,
+          "compareAtPrice": 29,
+          "initialQuantity": 3
+        },
+        {
+          "id": "motion-sensor",
+          "category": "Sensors",
+          "title": "Motion Sensor",
+          "description": "Detect unexpected movement in hallways and larger rooms.",
+          "learnMoreUrl": "#",
+          "image": "/assets/motion-sensor.svg",
+          "price": 34,
+          "compareAtPrice": 39,
+          "initialQuantity": 1
+        },
+        {
+          "id": "glassbreak-sensor",
+          "category": "Sensors",
+          "title": "Glassbreak Sensor",
+          "description": "Listen for the unique sound pattern of breaking glass.",
+          "learnMoreUrl": "#",
+          "image": "/assets/glassbreak-sensor.svg",
+          "price": 39,
+          "initialQuantity": 0
+        }
+      ]
+    },
+    {
+      "id": "accessories",
+      "step": 4,
+      "title": "Add extra protection",
+      "icon": "plus",
+      "nextLabel": "Review your system",
+      "products": [
+        {
+          "id": "keypad",
+          "category": "Accessories",
+          "title": "Wireless Keypad",
+          "description": "Arm and disarm your system from a hallway, entry or bedroom.",
+          "learnMoreUrl": "#",
+          "image": "/assets/keypad.svg",
+          "price": 49,
+          "compareAtPrice": 59,
+          "initialQuantity": 1
+        },
+        {
+          "id": "siren",
+          "category": "Accessories",
+          "title": "Indoor Siren",
+          "description": "A loud extra alarm for bigger homes and detached spaces.",
+          "learnMoreUrl": "#",
+          "badge": "Save 10%",
+          "image": "/assets/siren.svg",
+          "price": 44,
+          "compareAtPrice": 49,
+          "initialQuantity": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Monitoring plan">
+  <rect width="160" height="160" rx="24" fill="#eef5ef"/>
+  <path d="M80 24l48 18v34c0 30-18 52-48 64-30-12-48-34-48-64V42l48-18z" fill="#fff" stroke="#244238" stroke-width="6"/>
+  <path d="M57 82l16 16 34-38" fill="none" stroke="#1d6b57" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

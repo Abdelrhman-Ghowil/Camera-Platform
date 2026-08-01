@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Indoor siren">
+  <rect width="160" height="160" rx="24" fill="#f4eeee"/>
+  <circle cx="80" cy="84" r="42" fill="#fff" stroke="#244238" stroke-width="6"/>
+  <circle cx="80" cy="84" r="17" fill="#c94b4b"/>
+  <path d="M34 44l14 14M126 44l-14 14M80 22v20" stroke="#244238" stroke-width="7" stroke-linecap="round"/>
+</svg>

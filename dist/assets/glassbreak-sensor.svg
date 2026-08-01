@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Glassbreak sensor">
+  <rect width="160" height="160" rx="24" fill="#edf4f4"/>
+  <circle cx="80" cy="80" r="48" fill="#fff" stroke="#244238" stroke-width="6"/>
+  <path d="M80 48v22l16-8-18 50V88l-16 8 18-48z" fill="#1d6b57"/>
+</svg>
